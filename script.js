@@ -1,5 +1,5 @@
 var body = document.getElementsByTagName('body');
-body[0].setAttribute('onload', 'shuffle();');
+body[0].setAttribute('onload', ' shuffle();');
 
 var heading = document.createElement('h1');
 heading.textContent = "SLIDING TILE PUZZLE";
@@ -14,6 +14,19 @@ myDiv.setAttribute('class', 'grid');
 
 body[0].appendChild(mainDiv);
 mainDiv.appendChild(myDiv);
+
+var audio = document.createElement('audio');
+var source = document.createElement('source');
+audio.setAttribute('id', 'myAudio');
+source.setAttribute('src', 'audio.mp3');
+body[0].appendChild(audio);
+audio.appendChild(source);
+
+var x = document.getElementById("myAudio");
+
+function playAudio() {
+  x.play();
+}
 
 var button1 = document.createElement('button');
 button1.textContent = 1;
@@ -114,9 +127,8 @@ myDiv.appendChild(button16);
 
 var buttonS = document.createElement('button');
 buttonS.textContent = "Start game";
-buttonS.setAttribute('onClick', 'shuffle();');
+buttonS.setAttribute('onClick', 'shuffle(); startTime(); playAudio()');
 buttonS.classList.add("btn", "btn-primary:hover");
-buttonS.setAttribute('onClick', 'startTime();');
 body[0].appendChild(buttonS);
 
 var buttonR = document.createElement('button');
@@ -158,7 +170,9 @@ for (var row=1;row<=4;row++) {
 }
 }
 
+
 function clickTile(row,col){
+  if (count >0){
   if (row<4){
   if(document.getElementById("tile"+(row+1)+col).textContent == " "){
     swapTiles("tile"+row+col,"tile"+(row+1)+col);
@@ -183,7 +197,8 @@ function clickTile(row,col){
     grid();
     return;
   }}
-}
+}}
+
 
 
 function grid(){
